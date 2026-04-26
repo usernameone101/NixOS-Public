@@ -45,6 +45,8 @@
         git commit --allow-empty -m "placeholder commit so nix creates the .git required for syzkaller"
 
         sed -i '/GOFLAGS/d' Makefile
+        sed -i 's/prog.GitRevision == ""/false/g' syz-manager/manager.go || true
+        sed -i 's/prog.GitRevision == ""/false/g' syz-fuzzer/fuzzer.go || true
       '';
 
       buildPhase = ''
